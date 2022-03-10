@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body>
+
+    <!-- create your markup and styles -->
+    <div class="container">
+        <button class="arrow">⇦</button>
+        <div class="image-container">
+            <ul>
+                <li><img src="https://en.js.cx/carousel/1.png"></li>
+                <li><img src="https://en.js.cx/carousel/2.png"></li>
+                <li><img src="https://en.js.cx/carousel/3.png"></li>
+                <li><img src="https://en.js.cx/carousel/4.png"></li>
+                <li><img src="https://en.js.cx/carousel/5.png"></li>
+                <li><img src="https://en.js.cx/carousel/6.png"></li>
+                <li><img src="https://en.js.cx/carousel/7.png"></li>
+                <li><img src="https://en.js.cx/carousel/8.png"></li>
+                <li><img src="https://en.js.cx/carousel/9.png"></li>
+                <li><img src="https://en.js.cx/carousel/10.png"></li>
+            </ul>
+        </div>
+        <button class="arrow">⇨</button>
+    </div>
+
+    <style>
+        body {
+            background-color: lightgray;
+        }
+
+        ul {
+            display: flex;
+            flex-direction: row;
+            list-style-type: none;
+            padding: 0;
+            width: 100%;
+        }
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: auto;
+            border-radius: 10px;
+            background-color: white;
+            padding: 5px;
+            width: 500px;
+        }
+        .image-container{
+            overflow: hidden;
+        }
+
+        button {
+            border-radius: 10px;
+        }
+    </style>
+
+    <script>
+        const imageContainer = document.getElementsByClassName("image-container")[0]
+        const imgs = document.getElementsByTagName("img")
+        let imgsWidth = 0 
+        const buttons = document.getElementsByClassName("arrow")
+        const ul = document.getElementsByTagName("ul")[0]
+        ul.style.margin = "0px 0px 0px 0px"
+        ul.style.transition = "margin-left 0.3s, margin-right 0.3s"
+        setTimeout(() => {
+            imageContainer.style.width = (3 * imgs[0].width) + "px"
+            buttons[0].addEventListener("click", backward)
+            buttons[1].addEventListener("click", forward)
+            imgsWidth = imgs.length*imgs[0].width
+        }, 100);
+
+        function forward(event){
+            if(imgsWidth + parseInt(ul.style.marginLeft) >= (6 * imgs[0].width)){
+                ul.style.marginLeft = (parseInt(ul.style.marginLeft) - (3 * imgs[0].width)) + "px";
+            }else if(imgsWidth + parseInt(ul.style.marginLeft) > 0){
+                ul.style.marginLeft = -(imgsWidth - (3 * imgs[0].width)) + "px";
+            }
+        }
+        function backward(event){
+            if(-parseInt(ul.style.marginLeft) >= (3 * imgs[0].width)){
+                ul.style.marginLeft = (parseInt(ul.style.marginLeft) + (3 * imgs[0].width)) + "px";
+            }else if(-parseInt(ul.style.marginLeft) > 0){
+                ul.style.marginLeft = "0px";
+            }
+        }
+    </script>
+
+</body>
+
+</html>

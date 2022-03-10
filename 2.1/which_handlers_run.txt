@@ -1,0 +1,1 @@
+both, because it won't remove the listener if the handler passed is not the same

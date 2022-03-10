@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 4px;
+        }
+
+        th {
+            cursor: pointer;
+        }
+
+        th:hover {
+            background: yellow;
+        }
+    </style>
+</head>
+
+<body>
+
+    <table id="grid">
+        <thead>
+            <tr>
+                <th data-type="number">Age</th>
+                <th data-type="string">Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>5</td>
+                <td>John</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Pete</td>
+            </tr>
+            <tr>
+                <td>12</td>
+                <td>Ann</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>Eugene</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Ilya</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        grid.addEventListener("click", function (event){
+            console.log(event.target.dataset.type)
+            const tbody = document.getElementsByTagName("tbody")[0]
+            const trs = Array.from(tbody.children)
+            if(event.target.dataset.type === "number"){
+                trs.sort(function (a, b){
+                    return parseInt(a.children[0].textContent) < parseInt(b.children[0].textContent) ? -1 : 1
+                })
+                tbody.innerHTML = ""
+                trs.forEach((i)=>tbody.append(i))
+            }else if(event.target.dataset.type === "string"){
+                trs.sort(function (a, b){
+                    return a.children[1].textContent.charCodeAt(0) < b.children[1].textContent.charCodeAt(0) ? -1 : 1
+                })
+                tbody.innerHTML = ""
+                trs.forEach((i)=>tbody.append(i))
+            }
+        })
+    </script>
+
+</body>
+
+</html>

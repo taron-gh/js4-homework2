@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <style>
+        #field {
+            width: 200px;
+            height: 150px;
+            border: 10px solid black;
+            background-color: #00FF00;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body style="height:2000px">
+
+    Click on a field to move the ball there.
+    <br> The ball should never leave the field.
+
+
+    <div id="field">
+        <img src="https://en.js.cx/clipart/ball.svg" id="ball"> . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . .
+    </div>
+
+    <script>
+        const ball = document.getElementById("ball")
+        const field = document.getElementById("field")
+        field.style.position = "relative"
+        ball.style.position = "absolute"
+        ball.style.transition = "left 1s, top 1s"
+        field.addEventListener("click", moveBall)
+        function moveBall(event) {
+            let x = event.pageX - this.offsetLeft - this.clientLeft
+            let y = event.pageY - this.offsetTop - this.clientTop
+            if(x > this.offsetWidth - (ball.offsetWidth + this.offsetLeft)) x = this.offsetWidth - ball.offsetWidth
+            if(y > this.offsetHeight - (ball.offsetHeight + this.offsetTop)) y = this.offsetHeight - ball.offsetHeight
+            let ballX = (x - (ball.offsetWidth/2))
+            let ballY = (y - (ball.offsetHeight/2))
+            console.log(x, y);
+            ball.style.top = ballY + "px"
+            ball.style.left = ballX + "px"
+        }
+    </script>
+</body>
+
+</html>

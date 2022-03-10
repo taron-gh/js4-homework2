@@ -1,0 +1,6 @@
+handles is being called in the onclick attribute
+to solve this we can add return keyword in the onclick attribute
+Eventually it will work like this
+function onclick(){  -  the funcion executed, when event fires
+    return handler(); - this line is the code we wrote in onclick attribute
+}
